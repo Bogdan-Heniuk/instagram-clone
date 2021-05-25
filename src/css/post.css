@@ -1,0 +1,54 @@
+.post{
+    border: 1px solid #DBDBDB;
+    margin-bottom: 40px;
+}
+.post__image {
+    background: url('/src/images/man-tgx1_16-9.jpg') 50% 50% no-repeat;
+    width: 599px;
+    height: 600px;
+}
+
+.post__head {
+    padding: 10px 5px;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.head__avatar {
+    font-size: 20px;
+    margin-left: 10px;
+}
+
+.text__username {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.text__geo {
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.post__footer {
+    padding: 10px;
+}
+
+.footer__actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    font-size: 25px;
+}
+
+.like-comment {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.footer__likes {
+    margin-bottom: 10px;
+}

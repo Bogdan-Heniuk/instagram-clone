@@ -1,7 +1,7 @@
 import React from 'react';
 import {AiFillHome} from "react-icons/ai";
-import {FaUserCircle} from "react-icons/fa"
 import '../css/header.css'
+import {FaUserCircle} from "react-icons/fa"
 
 const Header = () => {
     return (
@@ -12,7 +12,7 @@ const Header = () => {
                         <img src="../images/1024px-Instagram_logo.svg.png" width='120' height='40' alt=""/>
                     </div>
                     <div className="navigation__search">
-                        <input type="text" placeholder='&#xf002;'/>
+                        <input type="text" placeholder='&#xf002; Поиск'/>
                     </div>
                     <div className="navigation__icons">
                         <div className="home">
