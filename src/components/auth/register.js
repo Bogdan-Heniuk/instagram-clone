@@ -29,9 +29,6 @@ const Register = () => {
         <div className='register'>
             <div className="container">
                 <div className="register__inner">
-                    <div className="register__image">
-                        <img src="../../images/gramgram-removebg-preview.png" alt=""/>
-                    </div>
                     <div className="register__form">
                         <div className="form__logo">
                             <img src="../../images/1024px-Instagram_logo.svg.png" width='210' height='70' alt=""/>
