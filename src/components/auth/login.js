@@ -2,29 +2,16 @@ import React from 'react';
 import '../../css/register.css'
 import {GrFacebook} from 'react-icons/gr'
 import useInputValue from "../../hooks/useInputValue";
+import {useDispatch} from "react-redux";
+import {login} from "../../redux/actions/auth";
 
 const Login = () => {
-    const name = useInputValue('')
     const email = useInputValue('')
-    const username = useInputValue('')
     const password = useInputValue('')
+    const dispatch = useDispatch()
 
-    const submitHandler = async () => {
-        const response = await fetch('http://localhost:8000/auth/login', {
-            method: "POST",
-            headers: {
-                'content-type': 'application/json'
-            },
+    const submitHandler = () => dispatch(login(email.value(), password.value()))
 
-            body: JSON.stringify({
-                email: email.value(),
-                password: password.value()
-            })
-        })
-
-        const responseToJSON = await response.json()
-        console.log(responseToJSON);
-    }
     return (
         <div className='register'>
             <div className="container">
