@@ -5,6 +5,7 @@ import {GrFacebook} from 'react-icons/gr'
 import useInputValue from "../../hooks/useInputValue";
 import {useDispatch} from "react-redux";
 import {login} from "../../redux/actions/auth";
+import {Link} from 'react-router-dom'
 
 const Login = () => {
     const email = useInputValue('')
@@ -46,7 +47,7 @@ const Login = () => {
                             <span className='login-link__text'>
                                У вас нет аккаунта?
                             </span>
-                            <a href="">Зарегистрироваться</a>
+                            <Link to ="/register">Зарегистрироваться</Link>
                         </div>
                     </div>
                 </div>

@@ -17,6 +17,7 @@ function App() {
             <Switch>
                 <PrivateRoute path = '/' exact component = {Root}/>
                 <PublicRoute path = '/login' component={Login}/>
+                <PublicRoute path = '/register' component={Register}/>
                 <FallbackRoute path = '*'/>
             </Switch>
         </BrowserRouter>
