@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useState} from 'react';
 import '../../css/register.css'
+import '../../css/login.css'
 import {GrFacebook} from 'react-icons/gr'
 import useInputValue from "../../hooks/useInputValue";
 import {useDispatch} from "react-redux";
@@ -9,8 +10,11 @@ const Login = () => {
     const email = useInputValue('')
     const password = useInputValue('')
     const dispatch = useDispatch()
-
-    const submitHandler = () => dispatch(login(email.value(), password.value()))
+    const [errorMessage, setErrorMessage] = useState('')
+    const submitHandler = async () => {
+        const error = await dispatch(login(email.value(), password.value()))
+        if (error) setErrorMessage(error)
+    }
 
     return (
         <div className='register'>
@@ -35,7 +39,9 @@ const Login = () => {
                         <div className="form__button">
                             <button><GrFacebook/>Войти через фейсбук</button>
                         </div>
-
+                        <div className='error'>
+                            {errorMessage}
+                        </div>
                         <div className="form__login-link">
                             <span className='login-link__text'>
                                У вас нет аккаунта?

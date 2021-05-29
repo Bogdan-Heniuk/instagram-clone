@@ -15,6 +15,8 @@ export const login = (email, password) => async (dispatch) => {
 
     const userData = await response.json()
 
+    if(!userData.ok) return userData.message
+
     dispatch({
         type : "LOGIN",
         payload : {
