@@ -1,8 +1,11 @@
 import React from 'react';
 import '../css/sidebar.css'
 import {FaUserCircle} from "react-icons/fa"
+import {useSelector} from "react-redux";
 
 const Sidebar = () => {
+    const user = useSelector(state => state.user.userData)
+
     return (
         <div className='sidebar'>
             <div className="sidebar__account">
@@ -11,7 +14,7 @@ const Sidebar = () => {
                         <FaUserCircle/>
                     </div>
                     <div className="account__text">
-                        <div className="account__username">makarovv</div>
+                        <div className="account__username">{user.username}</div>
                         <small className="account__small">
                             airpods pro
                         </small>
