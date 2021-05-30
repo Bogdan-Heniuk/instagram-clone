@@ -26,11 +26,12 @@
     color: #7b7b7b;
 }
 
+
 .sidebar__head {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 15px;
+    margin-bottom: 25px;
 }
 
 .head__title {
@@ -67,7 +68,7 @@
 }
 
 .recommended__subscribe a {
-    font-weight: 700;
+    font-weight: 500;
     text-decoration: none;
     color: #20A2F7;
     font-size: 14px;

@@ -3,7 +3,7 @@ import {Redirect} from 'react-router-dom'
 import {useSelector} from "react-redux";
 
 const FallbackRoute = () => {
-    const isLoggedIn = useSelector(state => state.user.loggedIn)
+    const isLoggedIn = useSelector(state => state.userData.loggedIn)
     if(isLoggedIn) {
         return <Redirect to='/'/>
     }
