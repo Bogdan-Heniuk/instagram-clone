@@ -2,17 +2,18 @@ import React, {useEffect} from 'react';
 import '../css/sidebar.css'
 import {FaUserCircle} from "react-icons/fa"
 import {useDispatch, useSelector} from "react-redux";
-import {getUsers} from "../redux/actions/users";
+import {getUsers, subscribe} from "../redux/actions/users";
 
 const Sidebar = () => {
     const userData = useSelector(state => state.userData.userData)
     const users = useSelector(state => state.users)
-    const token = useSelector(state => state.userData.token)
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(getUsers(token))
-    }, [])
+        dispatch(getUsers())
+    }, [users])
+
+
 
     return (
         <div className='sidebar'>
@@ -54,7 +55,7 @@ const Sidebar = () => {
                                         </div>
                                     </div>
                                     <div className="recommended__subscribe">
-                                        <a href="">подписаться</a>
+                                            <a onClick={() => dispatch(subscribe(user.id))} >подписаться</a>
                                     </div>
                                 </div>
                             )
