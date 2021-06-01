@@ -9,6 +9,7 @@ import PublicRoute from "./components/routes/publicRoute";
 import PrivateRoute from "./components/routes/privateRoute";
 import FallbackRoute from "./components/routes/fallbackRoute";
 import Root from "./components/root";
+import Profile from "./components/profile";
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
         <BrowserRouter>
             <Switch>
                 <PrivateRoute path = '/' exact component = {Root}/>
+                <PrivateRoute path = '/profile/:id' exact component = {Profile}/>
                 <PublicRoute path = '/login' component={Login}/>
                 <PublicRoute path = '/register' component={Register}/>
                 <FallbackRoute path = '*'/>
