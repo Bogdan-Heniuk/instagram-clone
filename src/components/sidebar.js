@@ -3,6 +3,7 @@ import '../css/sidebar.css'
 import {FaUserCircle} from "react-icons/fa"
 import {useDispatch, useSelector} from "react-redux";
 import {getUsers, subscribe} from "../redux/actions/users";
+import Avatar from "./avatar";
 
 const Sidebar = () => {
     const userData = useSelector(state => state.userData.userData)
@@ -18,10 +19,7 @@ const Sidebar = () => {
         <div className='sidebar'>
                 <div className="sidebar__account">
                     <div className="account__user">
-                        <div className="account__avatar">
-                            <FaUserCircle/>
-                            <img src="../images/" alt=""/>
-                        </div>
+                        <Avatar width='60px' height='60px'/>
                         <div className="account__text">
                             <div className="account__username">{userData.username}</div>
                             <small className="account__small">

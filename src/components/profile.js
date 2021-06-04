@@ -14,7 +14,6 @@ const Profile = (props) => {
         dispatch(getProfile(name))
     }, [])
 
-    // profileData.hasOwnProperty('id')
     return (
         <div>
             <Header/>

@@ -7,15 +7,12 @@
     margin-top: 30px;
 }
 
+
 .account__user {
     display: flex;
     align-items: center;
     gap: 20px;
     margin-bottom: 20px;
-}
-
-.account__avatar {
-    font-size: 35px;
 }
 
 .account__username {

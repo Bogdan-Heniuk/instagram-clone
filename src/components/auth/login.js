@@ -5,16 +5,18 @@ import {GrFacebook} from 'react-icons/gr'
 import useInputValue from "../../hooks/useInputValue";
 import {useDispatch} from "react-redux";
 import {login} from "../../redux/actions/auth";
-import {Link} from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
 
 const Login = () => {
     const email = useInputValue('')
     const password = useInputValue('')
     const dispatch = useDispatch()
+    const history = useHistory()
     const [errorMessage, setErrorMessage] = useState('')
     const submitHandler = async () => {
         const error = await dispatch(login(email.value(), password.value()))
-        if (error) setErrorMessage(error)
+        if (error) return setErrorMessage(error)
+        history.push('/')
     }
 
     return (

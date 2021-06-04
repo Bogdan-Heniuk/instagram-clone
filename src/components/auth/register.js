@@ -3,12 +3,14 @@ import '../../css/register.css'
 import {GrFacebook} from 'react-icons/gr'
 import useInputValue from "../../hooks/useInputValue";
 import {Link, useHistory} from "react-router-dom";
+import axios from 'axios';
 
 const Register = () => {
     const name = useInputValue('')
     const email = useInputValue('')
     const username = useInputValue('')
     const password = useInputValue('')
+    const [avatar, setAvatar] = useState('')
     const [registerError, setRegisterError] = useState('')
     const history = useHistory()
 
@@ -45,25 +47,24 @@ const Register = () => {
     }
 
     const submitHandler = async () => {
+
         const validated = validateInputs()
         if (!validated) return
-        const response = await fetch('http://localhost:8000/auth/registration', {
-            method: "POST",
-            headers: {
-                'content-type': 'application/json'
-            },
 
-            body: JSON.stringify({
-                name: name.value(),
-                email: email.value(),
-                username: username.value(),
-                password: password.value()
+        const formData = new FormData()
+        formData.append('name', name.value())
+        formData.append('email', email.value())
+        formData.append('username', username.value())
+        formData.append('password', password.value())
+        formData.append('file', avatar)
+
+        const response = await axios.post('http://localhost:8000/auth/registration', formData)
+            .catch(error => {
+                setRegisterError(error.response.data.message)
+                return {error : error.response.data.message}
             })
-        })
 
-        const responseToJSON = await response.json()
-
-        if (!response.ok) return setRegisterError(responseToJSON.message)
+        if(response.error) return
 
         name.clear()
         email.clear()
@@ -101,6 +102,7 @@ const Register = () => {
                             <small className='error'>{errorMessage.username}</small>
                             <input  {...password.bind} type="password" placeholder='Пароль'/>
                             <small className='error'>{errorMessage.password}</small>
+                            <input onChange={(e) => setAvatar(e.target.files[0])} name='avatar' type="file"/>
                         </div>
                         <div className="form__button register-btn">
                             <button onClick={submitHandler}>Регистрация</button>

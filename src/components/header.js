@@ -5,7 +5,8 @@ import {FaUserCircle} from "react-icons/fa"
 import {useDispatch, useSelector} from "react-redux";
 import {clearSearchedUsers, searchForUsers} from "../redux/actions/users";
 import {useHistory} from "react-router-dom";
-import {getProfile} from "../redux/actions/profile";
+import '../css/sidebar.css'
+import Avatar from "./avatar";
 
 const Header = () => {
     const searchResultsRef = useRef()
@@ -21,24 +22,25 @@ const Header = () => {
         setFocus(true)
     }
 
-    console.log(focus);
+    const onBackdropClick = () => {
+        setFocus(false)
+        dispatch(clearSearchedUsers())
+    }
+
 
     const inputHandler = (e) => {
-        if (!value) dispatch(clearSearchedUsers())
-        dispatch(searchForUsers(e.target.value))
         setValue(e.target.value)
+
+        if (!e.target.value) return dispatch(clearSearchedUsers())
+
+        dispatch(searchForUsers(e.target.value))
     }
 
-    const pushProfile = (id) => {
-        history.push(`/profile/${id}`)
+    const pushProfile = (username) => {
+        console.log(username);
+        history.push(`/profile/${username}`)
     }
 
-    const blurHandler = (event) => {
-        if (event.target.tagName === "INPUT") {
-            return;
-        }
-        setFocus(false)
-    }
 
     return (
         <nav className='navigation'>
@@ -48,15 +50,18 @@ const Header = () => {
                         <img src="../images/1024px-Instagram_logo.svg.png" width='120' height='40' alt=""/>
                     </div>
                     <div className="navigation__search">
-                        <input onBlur={(event) => blurHandler(event)} ref={inputRef} onFocus={focusHandler}
+                        <input
+                               value={value}
+                               onFocus={focusHandler}
                                onChange={(e) => inputHandler(e)} className='fas search' type="search"
                                placeholder='&#xf002; Поиск'/>
                     </div>
-                    <div className="search__results" style={focus ? {display: "block"} : {display: 'none'}}>
+                    {focus && <div className="backdrop" onClick={() => onBackdropClick()} />}
+                    {focus && <div className="search__results">
                         <div className="search__results__inner">
                             {searchedUsers.map(searchedUser => {
                                 return (
-                                    <div className="result" onClick={() => pushProfile(searchedUser.id)}
+                                    <div className="result" onClick={() => pushProfile(searchedUser.username)}
                                          key={searchedUser.id}>
                                         <div className="result__logo">
                                             <FaUserCircle/>
@@ -69,14 +74,12 @@ const Header = () => {
                             })}
 
                         </div>
-                    </div>
+                    </div>}
                     <div className="navigation__icons">
                         <div className="home">
                             <AiFillHome/>
                         </div>
-                        <div className="user">
-                            <FaUserCircle/>
-                        </div>
+                        <Avatar width='25px' height='25px'/>
                     </div>
                 </div>
             </div>
