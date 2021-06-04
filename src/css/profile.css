@@ -1,0 +1,28 @@
+.head__logo {
+    font-size: 100px;
+}
+.head {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 300px;
+    border-bottom: 1px solid #DBDBDB;
+}
+
+.userdata__header {
+    display: flex;
+    font-size: 20px;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.userdata__counts {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.userdata__name {
+    margin-bottom: 20px;
+}
