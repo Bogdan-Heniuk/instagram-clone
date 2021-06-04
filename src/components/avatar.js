@@ -7,7 +7,7 @@ const Avatar = ({width, height}) => {
 
     return (
         <div className='avatar' style={{
-            backgroundImage: `url("http://localhost:8000/${userData.avatar}")`,
+            backgroundImage: `url("http://localhost:8000/uploads/${userData.avatar}")`,
             width,
             height
         }}/>
