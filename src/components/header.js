@@ -9,11 +9,10 @@ import '../css/sidebar.css'
 import Avatar from "./avatar";
 
 const Header = () => {
-    const searchResultsRef = useRef()
-    const inputRef = useRef()
     const [focus, setFocus] = useState(false)
     const [value, setValue] = useState('')
     const searchedUsers = useSelector(state => state.searchedUsers)
+    const userData = useSelector(state => state.userData.userData)
     const dispatch = useDispatch()
     const history = useHistory()
 
@@ -64,7 +63,7 @@ const Header = () => {
                                     <div className="result" onClick={() => pushProfile(searchedUser.username)}
                                          key={searchedUser.id}>
                                         <div className="result__logo">
-                                            <FaUserCircle/>
+                                            <Avatar width='30px' height='30px' url={searchedUser.avatar}/>
                                         </div>
                                         <div className="result__username">
                                             {searchedUser.username}
@@ -79,7 +78,7 @@ const Header = () => {
                         <div className="home">
                             <AiFillHome/>
                         </div>
-                        <Avatar width='25px' height='25px'/>
+                        <Avatar width='25px' height='25px' url={userData.avatar}/>
                     </div>
                 </div>
             </div>

@@ -1,6 +1,5 @@
 import React, {useEffect} from 'react';
 import '../css/sidebar.css'
-import {FaUserCircle} from "react-icons/fa"
 import {useDispatch, useSelector} from "react-redux";
 import {getUsers, subscribe} from "../redux/actions/users";
 import Avatar from "./avatar";
@@ -19,7 +18,7 @@ const Sidebar = () => {
         <div className='sidebar'>
                 <div className="sidebar__account">
                     <div className="account__user">
-                        <Avatar width='60px' height='60px'/>
+                        <Avatar width='60px' height='60px' url={userData.avatar}/>
                         <div className="account__text">
                             <div className="account__username">{userData.username}</div>
                             <small className="account__small">
@@ -43,7 +42,7 @@ const Sidebar = () => {
                                 <div className="recommended" key={user.id}>
                                     <div className="recommended__user">
                                         <div className="recommended__avatar">
-                                            <FaUserCircle/>
+                                            <Avatar width='25px' height='25px' url={user.avatar}/>
                                         </div>
                                         <div className="recommended__text">
                                             <div className="recommended__username">{user.username}</div>
