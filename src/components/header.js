@@ -7,6 +7,7 @@ import {clearSearchedUsers, searchForUsers} from "../redux/actions/users";
 import {useHistory} from "react-router-dom";
 import '../css/sidebar.css'
 import Avatar from "./avatar";
+import {getProfile} from "../redux/actions/profile";
 
 const Header = () => {
     const [focus, setFocus] = useState(false)
@@ -22,6 +23,7 @@ const Header = () => {
     }
 
     const onBackdropClick = () => {
+        setValue('')
         setFocus(false)
         dispatch(clearSearchedUsers())
     }
@@ -36,7 +38,7 @@ const Header = () => {
     }
 
     const pushProfile = (username) => {
-        console.log(username);
+        dispatch(getProfile(username))
         history.push(`/profile/${username}`)
     }
 
@@ -50,12 +52,12 @@ const Header = () => {
                     </div>
                     <div className="navigation__search">
                         <input
-                               value={value}
-                               onFocus={focusHandler}
-                               onChange={(e) => inputHandler(e)} className='fas search' type="search"
-                               placeholder='&#xf002; Поиск'/>
+                            value={value}
+                            onFocus={focusHandler}
+                            onChange={(e) => inputHandler(e)} className='fas search' type="search"
+                            placeholder='&#xf002; Поиск'/>
                     </div>
-                    {focus && <div className="backdrop" onClick={() => onBackdropClick()} />}
+                    {focus && <div className="backdrop" onClick={() => onBackdropClick()}/>}
                     {focus && <div className="search__results">
                         <div className="search__results__inner">
                             {searchedUsers.map(searchedUser => {
@@ -63,10 +65,18 @@ const Header = () => {
                                     <div className="result" onClick={() => pushProfile(searchedUser.username)}
                                          key={searchedUser.id}>
                                         <div className="result__logo">
-                                            <Avatar width='30px' height='30px' url={searchedUser.avatar}/>
+                                            {searchedUser.avatar
+                                                ? <Avatar width='30px' height='30px' url={searchedUser.avatar}/>
+                                                : <FaUserCircle/>
+                                            }
                                         </div>
-                                        <div className="result__username">
-                                            {searchedUser.username}
+                                        <div className="result__text">
+                                            <div className="result__username">
+                                                {searchedUser.username}
+                                            </div>
+                                            <div className="result__name">
+                                                {searchedUser.name}
+                                            </div>
                                         </div>
                                     </div>
                                 )
@@ -76,15 +86,20 @@ const Header = () => {
                     </div>}
                     <div className="navigation__icons">
                         <div className="home">
-                            <AiFillHome/>
+                            <AiFillHome onClick={() => history.push('/')}/>
                         </div>
-                        <Avatar width='25px' height='25px' url={userData.avatar}/>
+                        <div className='user' onClick={() => history.push(`/profile/${userData.username}`)}>
+                            {userData.avatar
+                                ? <Avatar width='25px' height='25px' url={userData.avatar}/>
+                                : <FaUserCircle/>
+                            }
+                        </div>
                     </div>
                 </div>
             </div>
         </nav>
 
-    );
+);
 };
 
 export default Header;

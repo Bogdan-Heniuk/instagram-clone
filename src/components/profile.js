@@ -4,6 +4,7 @@ import {FaUserCircle} from "react-icons/fa";
 import Header from "./header";
 import '../css/profile.css'
 import {getProfile} from "../redux/actions/profile";
+import Avatar from "./avatar";
 
 const Profile = (props) => {
     const profileData = useSelector(state => state.profile)
@@ -11,6 +12,7 @@ const Profile = (props) => {
 
     useEffect(() => {
         const {name} = props.match.params
+        console.log(name);
         dispatch(getProfile(name))
     }, [])
 
@@ -20,7 +22,10 @@ const Profile = (props) => {
             <div className='container'>
                 <div className="head">
                     <div className="head__logo">
-                        <FaUserCircle/>
+                        {profileData.avatar
+                            ? <Avatar width='120px' height='120px' url={profileData.avatar}/>
+                            : <FaUserCircle/>
+                        }
                     </div>
                     <div className="head__userdata">
                         <div className="userdata__header">
