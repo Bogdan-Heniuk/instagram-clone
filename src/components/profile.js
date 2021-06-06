@@ -1,20 +1,26 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {FaUserCircle} from "react-icons/fa";
 import Header from "./header";
 import '../css/profile.css'
-import {getProfile} from "../redux/actions/profile";
 import Avatar from "./avatar";
+import {followProfile, unfollowProfile} from "../redux/actions/profile";
 
-const Profile = (props) => {
+const Profile = () => {
     const profileData = useSelector(state => state.profile)
     const dispatch = useDispatch()
 
-    useEffect(() => {
-        const {name} = props.match.params
-        console.log(name);
-        dispatch(getProfile(name))
-    }, [])
+    const displayButton = () => {
+        if (!profileData.hasOwnProperty('subscribed')) {
+            return <button>Редактировать профиль</button>
+        }
+
+        if(profileData.subscribed) return <button onClick={() => dispatch(unfollowProfile(profileData.id))}>Подписки</button>
+
+        return <button onClick={() => dispatch(followProfile(profileData.id))}>Подписаться</button>
+
+    }
+
 
     return (
         <div>
@@ -33,7 +39,7 @@ const Profile = (props) => {
                                 {profileData.username}
                             </div>
                             <div className="header__button">
-                                <button>Редактировать профиль</button>
+                                {displayButton()}
                             </div>
                         </div>
                         <div className="userdata__counts">

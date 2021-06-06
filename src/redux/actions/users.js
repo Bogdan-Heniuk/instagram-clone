@@ -1,6 +1,5 @@
 import {store} from "../store";
 
-
 export const getUsers = () => async dispatch => {
     const token = store.getState().userData.token
     const response = await fetch(`http://localhost:8000/users`, {
@@ -15,10 +14,10 @@ export const getUsers = () => async dispatch => {
     })
 }
 
-export const subscribe = (subscribed_id) => async dispatch => {
+export const subscribeOnRecommends = (subscribed_id) => async dispatch => {
     const token = store.getState().userData.token
 
-    const response = await fetch(`http://localhost:8000/users/subscribe`, {
+    await fetch(`http://localhost:8000/users/subscribe`, {
         method : "POST",
         headers : {
             'content-type' : 'application/json',

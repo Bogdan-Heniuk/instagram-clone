@@ -37,9 +37,11 @@ const Header = () => {
         dispatch(searchForUsers(e.target.value))
     }
 
-    const pushProfile = (username) => {
-        dispatch(getProfile(username))
+    const pushProfile = (username , profile_id) => {
+        dispatch(getProfile(profile_id))
         history.push(`/profile/${username}`)
+        setFocus(false)
+        setValue('')
     }
 
 
@@ -62,7 +64,7 @@ const Header = () => {
                         <div className="search__results__inner">
                             {searchedUsers.map(searchedUser => {
                                 return (
-                                    <div className="result" onClick={() => pushProfile(searchedUser.username)}
+                                    <div className="result" onClick={() => pushProfile(searchedUser.username, searchedUser.id)}
                                          key={searchedUser.id}>
                                         <div className="result__logo">
                                             {searchedUser.avatar
@@ -88,7 +90,7 @@ const Header = () => {
                         <div className="home">
                             <AiFillHome onClick={() => history.push('/')}/>
                         </div>
-                        <div className='user' onClick={() => history.push(`/profile/${userData.username}`)}>
+                        <div className='user' onClick={() => pushProfile(userData.username, userData.id)}>
                             {userData.avatar
                                 ? <Avatar width='25px' height='25px' url={userData.avatar}/>
                                 : <FaUserCircle/>

@@ -1,16 +1,22 @@
 import React, {useEffect} from 'react';
 import '../css/sidebar.css'
 import {useDispatch, useSelector} from "react-redux";
-import {getUsers, subscribe} from "../redux/actions/users";
+import {getUsers, subscribeOnRecommends} from "../redux/actions/users";
 import Avatar from "./avatar";
 import {FaUserCircle} from "react-icons/fa";
 import {useHistory} from "react-router-dom";
+import {getProfile} from "../redux/actions/profile";
 
 const Sidebar = () => {
     const userData = useSelector(state => state.userData.userData)
     const users = useSelector(state => state.users)
     const dispatch = useDispatch()
     const history = useHistory()
+
+    const pushProfile = (username) => {
+        dispatch(getProfile(username))
+        history.push(`/profile/${username}`)
+    }
     useEffect(() => {
         dispatch(getUsers())
     }, [])
@@ -46,8 +52,8 @@ const Sidebar = () => {
                     <div className="recommends__inner">
                         {users.map(user => {
                             return (
-                                <div className="recommended" onClick={() => history.push(`/profile/${user.username}`)} key={user.id}>
-                                    <div className="recommended__user">
+                                <div className="recommended" key={user.id}>
+                                    <div className="recommended__user" onClick={() => pushProfile(user.username)} >
                                         <div className="recommended__avatar">
                                             {user.avatar
                                                 ? <Avatar width='25px' height='25px' url={user.avatar}/>
@@ -62,7 +68,7 @@ const Sidebar = () => {
                                         </div>
                                     </div>
                                     <div className="recommended__subscribe">
-                                        <a onClick={() => dispatch(subscribe(user.id))}>подписаться</a>
+                                        <a onClick={() => dispatch(subscribeOnRecommends(user.id))}>подписаться</a>
                                     </div>
                                 </div>
                             )
