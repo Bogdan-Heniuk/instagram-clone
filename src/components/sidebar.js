@@ -13,8 +13,8 @@ const Sidebar = () => {
     const dispatch = useDispatch()
     const history = useHistory()
 
-    const pushProfile = (username) => {
-        dispatch(getProfile(username))
+    const pushProfile = (username, profile_id) => {
+        dispatch(getProfile(profile_id))
         history.push(`/profile/${username}`)
     }
     useEffect(() => {
@@ -25,7 +25,7 @@ const Sidebar = () => {
     return (
         <div className='sidebar'>
                 <div className="sidebar__account">
-                    <div className="account__user">
+                    <div className="account__user" onClick={() => pushProfile(userData.username, userData.id)}>
                         <div className="account__avatar">
                         {userData.avatar
                             ? <Avatar width='60px' height='60px' url={userData.avatar}/>
@@ -35,7 +35,7 @@ const Sidebar = () => {
                         <div className="account__text">
                             <div className="account__username">{userData.username}</div>
                             <small className="account__small">
-                                airpods pro
+                                {userData.name}
                             </small>
                         </div>
                     </div>
@@ -53,7 +53,7 @@ const Sidebar = () => {
                         {users.map(user => {
                             return (
                                 <div className="recommended" key={user.id}>
-                                    <div className="recommended__user" onClick={() => pushProfile(user.username)} >
+                                    <div className="recommended__user" onClick={() => pushProfile(user.username, user.id)} >
                                         <div className="recommended__avatar">
                                             {user.avatar
                                                 ? <Avatar width='25px' height='25px' url={user.avatar}/>

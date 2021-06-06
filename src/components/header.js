@@ -1,5 +1,6 @@
-import React, {useRef, useState} from 'react';
-import {AiFillHome} from "react-icons/ai";
+import React, {useState} from 'react';
+import {IoHomeOutline} from "react-icons/io5";
+import {IoHomeSharp} from "react-icons/io5";
 import '../css/header.css'
 import {FaUserCircle} from "react-icons/fa"
 import {useDispatch, useSelector} from "react-redux";
@@ -40,6 +41,7 @@ const Header = () => {
     const pushProfile = (username , profile_id) => {
         dispatch(getProfile(profile_id))
         history.push(`/profile/${username}`)
+        dispatch(clearSearchedUsers())
         setFocus(false)
         setValue('')
     }
@@ -88,7 +90,10 @@ const Header = () => {
                     </div>}
                     <div className="navigation__icons">
                         <div className="home">
-                            <AiFillHome onClick={() => history.push('/')}/>
+                            {history.location.pathname === '/'
+                                ? <IoHomeSharp onClick={() => history.push('/')}/>
+                                : <IoHomeOutline onClick={() => history.push('/')}/>
+                            }
                         </div>
                         <div className='user' onClick={() => pushProfile(userData.username, userData.id)}>
                             {userData.avatar

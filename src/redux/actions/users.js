@@ -14,7 +14,7 @@ export const getUsers = () => async dispatch => {
     })
 }
 
-export const subscribeOnRecommends = (subscribed_id) => async dispatch => {
+export const subscribeOnRecommends = (profile_id) => async dispatch => {
     const token = store.getState().userData.token
 
     await fetch(`http://localhost:8000/users/subscribe`, {
@@ -24,7 +24,7 @@ export const subscribeOnRecommends = (subscribed_id) => async dispatch => {
             token
         },
         body : JSON.stringify({
-            subscribed_id
+            profile_id
         })
     })
 

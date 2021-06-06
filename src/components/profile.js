@@ -47,10 +47,10 @@ const Profile = () => {
                                 5 публикаций
                             </div>
                             <div className="counts__subscribers">
-                                14 подписчиков
+                                {profileData.followers} подписчиков
                             </div>
                             <div className="counts__subscribes">
-                                15 подписок
+                                {profileData.followings} подписок
                             </div>
                         </div>
                         <div className="userdata__name">
