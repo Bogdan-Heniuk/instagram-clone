@@ -6,6 +6,7 @@ import Avatar from "./avatar";
 import {FaUserCircle} from "react-icons/fa";
 import {useHistory} from "react-router-dom";
 import {getProfile} from "../redux/actions/profile";
+import {getPosts} from "../redux/actions/posts";
 
 const Sidebar = () => {
     const userData = useSelector(state => state.userData.userData)
@@ -15,6 +16,7 @@ const Sidebar = () => {
 
     const pushProfile = (username, profile_id) => {
         dispatch(getProfile(profile_id))
+        dispatch(getPosts(profile_id))
         history.push(`/profile/${username}`)
     }
     useEffect(() => {

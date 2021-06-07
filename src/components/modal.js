@@ -10,8 +10,8 @@ const Modal = ({setModal}) => {
 
     const handleClick = () => {
         console.log(description.value());
-        console.log(image);
         dispatch(createPost(description.value(), image))
+        setModal(false)
     }
     return (
         <div id="myModal" className="modal">

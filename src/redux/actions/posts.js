@@ -1,12 +1,13 @@
 import axios from "axios";
 import {store} from "../store";
 
-export const getPosts = () => async dispatch => {
+export const getPosts = (profile_id) => async dispatch => {
     const token = store.getState().userData.token
-    const posts = (await axios.get('http://localhost:8000/posts', {
+
+    const posts = (await axios.get(`http://localhost:8000/posts/${profile_id}`, {
         headers: {
+            token,
             'content-type': 'application/json',
-            token
         }
     })).data
 

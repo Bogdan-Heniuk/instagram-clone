@@ -1,17 +1,18 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {FaUserCircle} from "react-icons/fa";
+import {MdApps} from "react-icons/md";
 import Header from "./header";
 import '../css/profile.css'
 import Avatar from "./avatar";
 import {followProfile, unfollowProfile} from "../redux/actions/profile";
 import Modal from "./modal";
 import {getPosts} from "../redux/actions/posts";
+import {BsBookmark} from "react-icons/bs";
 
 const Profile = () => {
     const profileData = useSelector(state => state.profile)
     const posts = useSelector(state => state.posts)
-    console.log(posts);
     const [modal, setModal] = useState(false)
     const dispatch = useDispatch()
 
@@ -19,21 +20,17 @@ const Profile = () => {
         if (!profileData.hasOwnProperty('subscribed'))
             return (
                 <div className='buttons'>
-                    <button>Редактировать профиль</button>
-                    <button onClick={() => setModal(true)}>Создать публикацию</button>
+                    <button className='button'>Редактировать профиль</button>
+                    <button className='button' onClick={() => setModal(true)}>Создать публикацию</button>
                 </div>
             )
 
-        if(profileData.subscribed)
+        if (profileData.subscribed)
             return <button onClick={() => dispatch(unfollowProfile(profileData.id))}>Подписки</button>
 
         return <button onClick={() => dispatch(followProfile(profileData.id))}>Подписаться</button>
     }
 
-
-    useEffect(() => {
-        dispatch(getPosts())
-    }, [])
 
     return (
         <div>
@@ -58,13 +55,13 @@ const Profile = () => {
                         </div>
                         <div className="userdata__counts">
                             <div className="counts__posts">
-                                5 публикаций
+                                <strong>{profileData.postsNumber}</strong> публикаций
                             </div>
                             <div className="counts__subscribers">
-                                {profileData.followers} подписчиков
+                                <strong>{profileData.followers}</strong> подписчиков
                             </div>
                             <div className="counts__subscribes">
-                                {profileData.followings} подписок
+                                <strong>{profileData.followings}</strong> подписок
                             </div>
                         </div>
                         <div className="userdata__name">
@@ -72,8 +69,25 @@ const Profile = () => {
                         </div>
                     </div>
                 </div>
-                <div className="nav"></div>
-                <div className="posts"></div>
+                <div className="nav">
+                    <div className="nav__item">
+                        <MdApps/>
+                        Публикации
+                    </div>
+                    <div className="nav__item">
+                        <BsBookmark/>
+                        Сохраненное
+                    </div>
+                </div>
+                <div className="profile_posts">
+                    {posts.map(post => {
+                        return (
+                            <div className="profile_post" key={post.id} style={{
+                                backgroundImage: `url("http://localhost:8000/uploads/${post.image}")`,
+                            }}/>
+                        )
+                    })}
+                </div>
             </div>
         </div>
     );

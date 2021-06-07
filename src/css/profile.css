@@ -24,5 +24,47 @@
 }
 
 .userdata__name {
+    font-weight: 500;
     margin-bottom: 20px;
+}
+
+.buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.button {
+    cursor: pointer;
+    font-weight: 500;
+    background-color: #FAFAFA;
+    border: 1px solid #DBDBDB;
+    padding: 5px 10px;
+}
+
+.nav {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+}
+
+.profile_posts {
+    margin-top: 30px;
+    gap: 15px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.nav__item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.profile_post {
+    width: 300px;
+    height: 300px;
+    background-size: cover;
+    background-position: center;
 }

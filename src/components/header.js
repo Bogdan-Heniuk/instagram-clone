@@ -9,6 +9,7 @@ import {useHistory} from "react-router-dom";
 import '../css/sidebar.css'
 import Avatar from "./avatar";
 import {getProfile} from "../redux/actions/profile";
+import {getPosts} from "../redux/actions/posts";
 
 const Header = () => {
     const [focus, setFocus] = useState(false)
@@ -42,6 +43,7 @@ const Header = () => {
         dispatch(getProfile(profile_id))
         history.push(`/profile/${username}`)
         dispatch(clearSearchedUsers())
+        dispatch(getPosts(profile_id))
         setFocus(false)
         setValue('')
     }
