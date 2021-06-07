@@ -1,4 +1,7 @@
 import React, {useEffect, useState} from 'react';
+import {AiOutlineHeart} from "react-icons/ai"
+import {FaRegComment} from "react-icons/fa"
+
 import {useDispatch, useSelector} from "react-redux";
 import {FaUserCircle} from "react-icons/fa";
 import {MdApps} from "react-icons/md";
@@ -7,7 +10,6 @@ import '../css/profile.css'
 import Avatar from "./avatar";
 import {followProfile, unfollowProfile} from "../redux/actions/profile";
 import Modal from "./modal";
-import {getPosts} from "../redux/actions/posts";
 import {BsBookmark} from "react-icons/bs";
 
 const Profile = () => {
@@ -84,7 +86,8 @@ const Profile = () => {
                         return (
                             <div className="profile_post" key={post.id} style={{
                                 backgroundImage: `url("http://localhost:8000/uploads/${post.image}")`,
-                            }}/>
+                            }}
+                            />
                         )
                     })}
                 </div>
