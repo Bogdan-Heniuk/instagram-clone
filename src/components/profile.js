@@ -5,25 +5,39 @@ import Header from "./header";
 import '../css/profile.css'
 import Avatar from "./avatar";
 import {followProfile, unfollowProfile} from "../redux/actions/profile";
+import Modal from "./modal";
+import {getPosts} from "../redux/actions/posts";
 
 const Profile = () => {
     const profileData = useSelector(state => state.profile)
+    const posts = useSelector(state => state.posts)
+    console.log(posts);
+    const [modal, setModal] = useState(false)
     const dispatch = useDispatch()
 
     const displayButton = () => {
-        if (!profileData.hasOwnProperty('subscribed')) {
-            return <button>Редактировать профиль</button>
-        }
+        if (!profileData.hasOwnProperty('subscribed'))
+            return (
+                <div className='buttons'>
+                    <button>Редактировать профиль</button>
+                    <button onClick={() => setModal(true)}>Создать публикацию</button>
+                </div>
+            )
 
-        if(profileData.subscribed) return <button onClick={() => dispatch(unfollowProfile(profileData.id))}>Подписки</button>
+        if(profileData.subscribed)
+            return <button onClick={() => dispatch(unfollowProfile(profileData.id))}>Подписки</button>
 
         return <button onClick={() => dispatch(followProfile(profileData.id))}>Подписаться</button>
-
     }
 
 
+    useEffect(() => {
+        dispatch(getPosts())
+    }, [])
+
     return (
         <div>
+            {modal && <Modal setModal={setModal}/>}
             <Header/>
             <div className='container'>
                 <div className="head">
