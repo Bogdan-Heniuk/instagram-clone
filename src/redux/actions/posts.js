@@ -1,5 +1,6 @@
 import axios from "axios";
 import {store} from "../store";
+import {getProfile} from "./profile";
 
 export const getPosts = (profile_id) => async dispatch => {
     const token = store.getState().userData.token
@@ -24,12 +25,15 @@ export const createPost = (description, image) => async dispatch => {
     formData.append('description', description)
     formData.append('image', image)
 
-    await axios.post('http://localhost:8000/posts', formData, {
+    const response = await axios.post('http://localhost:8000/posts', formData, {
         headers: {
             'content-type': 'application/json',
             token
         }
     })
 
-    dispatch(getPosts())
+    const post = response.data
+
+    dispatch(getPosts(post.user_id))
+    dispatch(getProfile(post.user_id))
 }
