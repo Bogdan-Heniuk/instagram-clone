@@ -14,7 +14,8 @@ import {BsBookmark} from "react-icons/bs";
 
 const Profile = () => {
     const profileData = useSelector(state => state.profile)
-    const posts = useSelector(state => state.posts)
+    const posts = useSelector(state => state.profile.posts)
+    console.log(posts);
     const [modal, setModal] = useState(false)
     const dispatch = useDispatch()
 
@@ -82,7 +83,7 @@ const Profile = () => {
                     </div>
                 </div>
                 <div className="profile_posts">
-                    {posts.map(post => {
+                    {posts?.map(post => {
                         return (
                             <div className="profile_post" key={post.id} style={{
                                 backgroundImage: `url("http://localhost:8000/uploads/${post.image}")`,

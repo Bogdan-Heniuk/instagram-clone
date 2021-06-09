@@ -18,3 +18,4 @@ export const getFeed = () => async dispatch => {
         payload : feed
     })
 }
+

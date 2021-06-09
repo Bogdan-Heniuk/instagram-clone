@@ -11,7 +11,8 @@
 }
 
 .post__head {
-    padding: 10px 5px;
+    cursor: pointer;
+    padding: 20px 5px;
     background-color: #fff;
     display: flex;
     /*align-items: center;*/
@@ -49,6 +50,9 @@
     display: flex;
     align-items: center;
     gap: 15px;
+}
+.like, .comment, .save {
+    cursor: pointer;
 }
 
 .footer__likes {

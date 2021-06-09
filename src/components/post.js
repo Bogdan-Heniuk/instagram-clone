@@ -1,15 +1,29 @@
 import React from 'react';
 import {FaUserCircle} from "react-icons/fa"
 import {AiOutlineHeart} from "react-icons/ai"
+import {AiFillHeart} from "react-icons/ai"
 import {FaRegComment} from "react-icons/fa"
 import {BsBookmark} from "react-icons/bs"
+import {BsBookmarkFill} from "react-icons/bs"
 import '../css/post.css'
 import Avatar from "./avatar";
+import {getProfile} from "../redux/actions/profile";
+import {useDispatch} from "react-redux";
+import {useHistory} from "react-router-dom";
+import {dislikePost, likePost} from "../redux/actions/posts";
 
 const Post = ({postData}) => {
+    const dispatch = useDispatch()
+    const history = useHistory()
+
+    const pushProfile = (user_id) => {
+        dispatch(getProfile(user_id))
+        history.push(`/profile/${postData.username}`)
+    }
+
     return (
         <div className='post'>
-            <div className="post__head">
+            <div className="post__head" onClick={() => pushProfile(postData.user_id)}>
                 <div className="head__avatar">
                     {postData.avatar
                         ? <Avatar width='25px' height='25px' url={postData.avatar}/>
@@ -18,7 +32,6 @@ const Post = ({postData}) => {
                 </div>
                 <div className="head__text">
                     <div className="text__username">{postData.username}</div>
-                    {/*<div className="text__geo">Kiev, Ukraine</div>*/}
                 </div>
             </div>
             <div className="post__image" style={{
@@ -28,15 +41,21 @@ const Post = ({postData}) => {
             <div className="post__footer">
                 <div className="footer__actions">
                     <div className='like-comment'>
-                        <AiOutlineHeart/>
-                        <FaRegComment/>
+                        <div className="like" >
+                            {postData.isLiked
+                                ? <AiFillHeart color={'red'} onClick={() => dispatch(dislikePost(postData.id))}/>
+                                :  <AiOutlineHeart onClick={() => dispatch(likePost(postData.id))}/>}
+                        </div>
+                        <div className="comment">
+                            <FaRegComment/>
+                        </div>
                     </div>
                     <div className='save'>
-                        <BsBookmark/>
+                        {postData.isSaved ? <BsBookmarkFill/> : <BsBookmark/>}
                     </div>
                 </div>
                 <div className="footer__likes">
-                    Нравится <strong>{postData.likes}</strong>
+                    Нравится: <strong>{postData.likes}</strong>
                 </div>
                 <div className="footer__description">
                     {postData.description}

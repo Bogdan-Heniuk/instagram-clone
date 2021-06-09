@@ -1,6 +1,7 @@
 import axios from "axios";
 import {store} from "../store";
 import {getProfile} from "./profile";
+import {getFeed} from "./feed";
 
 export const getPosts = (profile_id) => async dispatch => {
     const token = store.getState().userData.token
@@ -38,4 +39,29 @@ export const createPost = (description, image) => async dispatch => {
     dispatch(getProfile(post.user_id))
 }
 
+export const likePost = post_id => async dispatch => {
+    const token = store.getState().userData.token
+
+    await axios.post("http://localhost:8000/posts/feed/like", {post_id}, {
+        headers: {
+            'content-type': 'application/json',
+            token
+        }
+    })
+
+    dispatch(getFeed())
+}
+
+export const dislikePost = post_id => async dispatch => {
+    const token = store.getState().userData.token
+
+    await axios.post("http://localhost:8000/posts/feed/dislike", {post_id}, {
+        headers: {
+            'content-type': 'application/json',
+            token
+        }
+    })
+
+    dispatch(getFeed())
+}
 

@@ -7,9 +7,10 @@ import {getFeed} from "../redux/actions/feed";
 const Feed = () => {
     const feed = useSelector(state => state.feed)
     const dispatch = useDispatch()
+
     useEffect(() => {
         dispatch(getFeed())
-    })
+    }, [])
 
     return (
         <div className='feed'>
