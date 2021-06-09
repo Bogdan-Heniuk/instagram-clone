@@ -3,7 +3,9 @@
     margin-bottom: 40px;
 }
 .post__image {
-    background: url('/src/images/man-tgx1_16-9.jpg') 50% 50% no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
     width: 599px;
     height: 600px;
 }
@@ -12,8 +14,8 @@
     padding: 10px 5px;
     background-color: #fff;
     display: flex;
-    align-items: center;
-    gap: 20px;
+    /*align-items: center;*/
+    gap: 15px;
 }
 
 .head__avatar {

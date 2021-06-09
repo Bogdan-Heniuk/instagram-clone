@@ -37,3 +37,5 @@ export const createPost = (description, image) => async dispatch => {
     dispatch(getPosts(post.user_id))
     dispatch(getProfile(post.user_id))
 }
+
+
