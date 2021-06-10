@@ -43,8 +43,8 @@ const Post = ({postData}) => {
                     <div className='like-comment'>
                         <div className="like" >
                             {postData.isLiked
-                                ? <AiFillHeart color={'red'} onClick={() => dispatch(dislikePost(postData.id))}/>
-                                :  <AiOutlineHeart onClick={() => dispatch(likePost(postData.id))}/>}
+                                ? <AiFillHeart color={'red'} onClick={() => dispatch(dislikePost(postData.post_id))}/>
+                                :  <AiOutlineHeart onClick={() => dispatch(likePost(postData.post_id))}/>}
                         </div>
                         <div className="comment">
                             <FaRegComment/>
