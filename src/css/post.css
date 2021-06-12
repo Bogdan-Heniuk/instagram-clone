@@ -1,4 +1,5 @@
 .post{
+    overflow: hidden;
     border: 1px solid #DBDBDB;
     margin-bottom: 40px;
 }
@@ -6,8 +7,8 @@
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    width: 599px;
-    height: 600px;
+    width: 35em;
+    height: 35em;
 }
 
 .post__head {

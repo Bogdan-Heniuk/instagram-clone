@@ -16,7 +16,7 @@ function App() {
                 <Route path = '/profile/:username' exact component = {Profile}/>
                 <Route path = '/login' component={Login}/>
                 <Route path = '/register' component={Register}/>
-                {/*<FallbackRoute path = '*'/>*/}
+                <FallbackRoute path = '*' component = {Root}/>
             </Switch>
         </BrowserRouter>
     )
