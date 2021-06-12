@@ -5,8 +5,6 @@ import {getUsers, subscribeOnRecommends} from "../redux/actions/users";
 import Avatar from "./avatar";
 import {FaUserCircle} from "react-icons/fa";
 import {useHistory} from "react-router-dom";
-import {getProfile} from "../redux/actions/profile";
-import {getPosts} from "../redux/actions/posts";
 
 const Sidebar = () => {
     const userData = useSelector(state => state.userData.userData)
@@ -14,9 +12,7 @@ const Sidebar = () => {
     const dispatch = useDispatch()
     const history = useHistory()
 
-    const pushProfile = (username, profile_id) => {
-        dispatch(getProfile(profile_id))
-        dispatch(getPosts(profile_id))
+    const pushProfile = (username) => {
         history.push(`/profile/${username}`)
     }
     useEffect(() => {
@@ -27,7 +23,7 @@ const Sidebar = () => {
     return (
         <div className='sidebar'>
                 <div className="sidebar__account">
-                    <div className="account__user" onClick={() => pushProfile(userData.username, userData.id)}>
+                    <div className="account__user" onClick={() => pushProfile(userData.username)}>
                         <div className="account__avatar">
                         {userData.avatar
                             ? <Avatar width='60px' height='60px' url={userData.avatar}/>
@@ -55,7 +51,7 @@ const Sidebar = () => {
                         {users.map(user => {
                             return (
                                 <div className="recommended" key={user.id}>
-                                    <div className="recommended__user" onClick={() => pushProfile(user.username, user.id)} >
+                                    <div className="recommended__user" onClick={() => pushProfile(user.username)} >
                                         <div className="recommended__avatar">
                                             {user.avatar
                                                 ? <Avatar width='25px' height='25px' url={user.avatar}/>

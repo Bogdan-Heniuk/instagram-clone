@@ -8,8 +8,6 @@ import {clearSearchedUsers, searchForUsers} from "../redux/actions/users";
 import {useHistory} from "react-router-dom";
 import '../css/sidebar.css'
 import Avatar from "./avatar";
-import {getProfile} from "../redux/actions/profile";
-import {getPosts} from "../redux/actions/posts";
 
 const Header = () => {
     const [focus, setFocus] = useState(false)
@@ -39,11 +37,9 @@ const Header = () => {
         dispatch(searchForUsers(e.target.value))
     }
 
-    const pushProfile = (username , profile_id) => {
-        dispatch(getProfile(profile_id))
+    const pushProfile = (username) => {
         history.push(`/profile/${username}`)
         dispatch(clearSearchedUsers())
-        dispatch(getPosts(profile_id))
         setFocus(false)
         setValue('')
     }
@@ -68,7 +64,7 @@ const Header = () => {
                         <div className="search__results__inner">
                             {searchedUsers.map(searchedUser => {
                                 return (
-                                    <div className="result" onClick={() => pushProfile(searchedUser.username, searchedUser.id)}
+                                    <div className="result" onClick={() => pushProfile(searchedUser.username)}
                                          key={searchedUser.id}>
                                         <div className="result__logo">
                                             {searchedUser.avatar
@@ -97,7 +93,7 @@ const Header = () => {
                                 : <IoHomeOutline onClick={() => history.push('/')}/>
                             }
                         </div>
-                        <div className='user' onClick={() => pushProfile(userData.username, userData.id)}>
+                        <div className='user' onClick={() => pushProfile(userData.username)}>
                             {userData.avatar
                                 ? <Avatar width='25px' height='25px' url={userData.avatar}/>
                                 : <FaUserCircle/>

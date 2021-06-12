@@ -16,14 +16,13 @@ const Post = ({postData}) => {
     const dispatch = useDispatch()
     const history = useHistory()
 
-    const pushProfile = (user_id) => {
-        dispatch(getProfile(user_id))
+    const pushProfile = () => {
         history.push(`/profile/${postData.username}`)
     }
 
     return (
         <div className='post'>
-            <div className="post__head" onClick={() => pushProfile(postData.user_id)}>
+            <div className="post__head" onClick={() => pushProfile()}>
                 <div className="head__avatar">
                     {postData.avatar
                         ? <Avatar width='25px' height='25px' url={postData.avatar}/>

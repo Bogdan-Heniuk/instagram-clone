@@ -1,7 +1,6 @@
 import React from 'react';
 import Header from "./header";
 import Main from "./main";
-import {useSelector} from "react-redux";
 
 const Root = () => {
     return (

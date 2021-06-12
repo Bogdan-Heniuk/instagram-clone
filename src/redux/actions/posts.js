@@ -22,21 +22,21 @@ export const getPosts = (profile_id) => async dispatch => {
 
 export const createPost = (description, image) => async dispatch => {
     const token = store.getState().userData.token
+    const username = store.getState().userData.userData.username
+
     const formData = new FormData()
     formData.append('description', description)
     formData.append('image', image)
 
-    const response = await axios.post('http://localhost:8000/posts', formData, {
+    await axios.post('http://localhost:8000/posts', formData, {
         headers: {
             'content-type': 'application/json',
             token
         }
     })
 
-    const post = response.data
 
-    dispatch(getPosts(post.user_id))
-    dispatch(getProfile(post.user_id))
+    dispatch(getProfile(username))
 }
 
 export const likePost = post_id => async dispatch => {

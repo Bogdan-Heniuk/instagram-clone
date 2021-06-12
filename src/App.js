@@ -13,7 +13,7 @@ function App() {
         <BrowserRouter>
             <Switch>
                 <PrivateRoute path = '/' exact component = {Root}/>
-                <Route path = '/profile/:name' exact component = {Profile}/>
+                <Route path = '/profile/:username' exact component = {Profile}/>
                 <Route path = '/login' component={Login}/>
                 <Route path = '/register' component={Register}/>
                 {/*<FallbackRoute path = '*'/>*/}

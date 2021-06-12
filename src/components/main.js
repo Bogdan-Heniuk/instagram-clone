@@ -6,12 +6,6 @@ import {clearProfile} from "../redux/actions/profile";
 import {useDispatch} from "react-redux";
 
 const Main = () => {
-    const dispatch = useDispatch()
-
-    useEffect(() => {
-        dispatch(clearProfile())
-    }, [])
-
     return (
         <div className='container'>
             <div className="main">

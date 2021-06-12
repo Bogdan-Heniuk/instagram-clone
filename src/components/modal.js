@@ -9,7 +9,6 @@ const Modal = ({setModal}) => {
     const [image, setImage] = useState('')
 
     const handleClick = () => {
-        console.log(description.value());
         dispatch(createPost(description.value(), image))
         setModal(false)
     }

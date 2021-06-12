@@ -1,6 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import {AiOutlineHeart} from "react-icons/ai"
-import {FaRegComment} from "react-icons/fa"
 
 import {useDispatch, useSelector} from "react-redux";
 import {FaUserCircle} from "react-icons/fa";
@@ -8,16 +6,23 @@ import {MdApps} from "react-icons/md";
 import Header from "./header";
 import '../css/profile.css'
 import Avatar from "./avatar";
-import {followProfile, unfollowProfile} from "../redux/actions/profile";
+import {clearProfile, followProfile, getProfile, unfollowProfile} from "../redux/actions/profile";
 import Modal from "./modal";
 import {BsBookmark} from "react-icons/bs";
 
-const Profile = () => {
+const Profile = (props) => {
     const profileData = useSelector(state => state.profile)
     const posts = useSelector(state => state.profile.posts)
-    console.log(posts);
     const [modal, setModal] = useState(false)
     const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(getProfile(props.match.params.username))
+
+        return () => {
+            dispatch(clearProfile())
+        }
+    }, [])
 
     const displayButton = () => {
         if (!profileData.hasOwnProperty('subscribed'))
@@ -29,9 +34,9 @@ const Profile = () => {
             )
 
         if (profileData.subscribed)
-            return <button onClick={() => dispatch(unfollowProfile(profileData.id))}>Подписки</button>
+            return <button onClick={() => dispatch(unfollowProfile(profileData.id, profileData.username))}>Подписки</button>
 
-        return <button onClick={() => dispatch(followProfile(profileData.id))}>Подписаться</button>
+        return <button onClick={() => dispatch(followProfile(profileData.id, profileData.username))}>Подписаться</button>
     }
 
 
