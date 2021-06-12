@@ -22,7 +22,7 @@ const Profile = (props) => {
         return () => {
             dispatch(clearProfile())
         }
-    }, [])
+    }, [props.match.params.username])
 
     const displayButton = () => {
         if (!profileData.hasOwnProperty('subscribed'))
