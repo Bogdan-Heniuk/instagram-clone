@@ -25,6 +25,17 @@ const like = async post_id => {
     })
 }
 
+const comment = async (post_id, text) => {
+    const token = store.getState().userData.token
+
+    await axios.post(`http://localhost:8000/posts/view/comment/${post_id}`, {text}, {
+        headers: {
+            'content-type': 'application/json',
+            token
+        }
+    })
+}
+
 export const createPost = (description, image) => async dispatch => {
     const token = store.getState().userData.token
     const username = store.getState().userData.userData.username
@@ -76,6 +87,11 @@ export const viewPost = post_id => async dispatch => {
         type : "GET_POSTDATA",
         payload : postData
     })
+}
+
+export const commentPostInProfile = (post_id, text) => async dispatch => {
+    await comment(post_id, text)
+    dispatch(viewPost(post_id))
 }
 
 export const clearPostData = () => {

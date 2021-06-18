@@ -112,9 +112,9 @@
 .submit-comment {
     text-decoration: none;
     font-weight: 700;
-    color: #E4F4FE;
+    color: #0191e7;
 }
 
 .submit-comment-active {
-    color: #B3DFFC;
+    color: #8daecb;
 }
