@@ -9,12 +9,19 @@ import Avatar from "./avatar";
 import {clearProfile, followProfile, getProfile, unfollowProfile} from "../redux/actions/profile";
 import Modal from "./modal";
 import {BsBookmark} from "react-icons/bs";
+import {viewPost} from "../redux/actions/posts";
+import ViewPost from "./viewPost";
 
 const Profile = (props) => {
     const profileData = useSelector(state => state.profile)
     const posts = useSelector(state => state.profile.posts)
     const [modal, setModal] = useState(false)
+    const [viewPostModal, setViewPostModal] = useState(false)
     const dispatch = useDispatch()
+    const handleClick = (e) => {
+        setViewPostModal(true)
+        dispatch((viewPost(+e.target.dataset.value)))
+    }
 
     useEffect(() => {
         dispatch(getProfile(props.match.params.username))
@@ -43,6 +50,7 @@ const Profile = (props) => {
     return (
         <div>
             {modal && <Modal setModal={setModal}/>}
+            {viewPostModal && <ViewPost setViewPostModal={setViewPostModal}/>}
             <Header/>
             <div className='container'>
                 <div className="head">
@@ -93,6 +101,7 @@ const Profile = (props) => {
                             <div className="profile_post" key={post.id} style={{
                                 backgroundImage: `url("http://localhost:8000/uploads/${post.image}")`,
                             }}
+                                 data-value={post.id} onClick={(e) => handleClick(e)}
                             />
                         )
                     })}

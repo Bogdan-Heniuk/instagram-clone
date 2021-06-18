@@ -1,0 +1,120 @@
+
+.post-modal {
+    display: block; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 3; /* Sit on top */
+    left: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: hidden; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.post-modal-content {
+    background-color: #fefefe;
+    margin: 5% auto; /* 15% from the top and centered */
+    padding: 0;
+    border: 1px solid #888;
+    width: 60%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+    position: absolute;
+    top: 7px;
+    right: 35px;
+    color: #e8e8e8;
+    float: right;
+    font-size: 38px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+.image {
+    width: 500px;
+    height: 600px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.modal-content-inner {
+    display: flex;
+}
+
+.info {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    max-width: 400px;
+}
+
+.post-user {
+    padding: 20px 0 20px 20px;
+    border-bottom: 2px solid #EFEFEF;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 20px;
+}
+
+.comments {
+    height: 374px;
+    overflow: auto;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #EFEFEF;
+}
+
+.comment {
+    margin: 20px 0 40px 20px;
+}
+
+.comment-user {
+    display: flex;
+    align-items: center;
+}
+
+.comment-user__username {
+    margin: 0 10px 0 7px;
+    font-weight: 700;
+}
+
+.comment-text {
+    word-wrap:break-word;
+    max-width: 200px;
+}
+
+.prof {
+    border-bottom: 2px solid #EFEFEF;
+}
+
+.comment-input{
+    /*padding: 10px 0;*/
+    display: flex;
+    align-items: center;
+}
+
+.comment-input input{
+    border: none;
+    height: 100%;
+    width: 100%;
+    padding: 18px;
+    outline: none;
+}
+
+.submit-comment {
+    text-decoration: none;
+    font-weight: 700;
+    color: #E4F4FE;
+}
+
+.submit-comment-active {
+    color: #B3DFFC;
+}

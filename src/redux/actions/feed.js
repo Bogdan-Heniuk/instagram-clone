@@ -19,3 +19,9 @@ export const getFeed = () => async dispatch => {
     })
 }
 
+export const clearFeed = () => {
+    return {
+        type : "CLEAR_FEED"
+    }
+}
+

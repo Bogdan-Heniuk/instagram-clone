@@ -36,7 +36,7 @@
 }
 
 .post__footer {
-    padding: 10px;
+    padding: 5px;
 }
 
 .footer__actions {
@@ -52,7 +52,7 @@
     align-items: center;
     gap: 15px;
 }
-.like, .comment, .save {
+.like-action, .comment-action, .save-action {
     cursor: pointer;
 }
 

@@ -1,14 +1,14 @@
 import React, {useEffect} from 'react';
 import '../css/sidebar.css'
 import {useDispatch, useSelector} from "react-redux";
-import {getUsers, subscribeOnRecommends} from "../redux/actions/users";
+import {clearRecommends, getRecommends, subscribeOnRecommends} from "../redux/actions/users";
 import Avatar from "./avatar";
 import {FaUserCircle} from "react-icons/fa";
 import {useHistory} from "react-router-dom";
 
 const Sidebar = () => {
     const userData = useSelector(state => state.userData.userData)
-    const users = useSelector(state => state.users)
+    const users = useSelector(state => state.usersRecommends)
     const dispatch = useDispatch()
     const history = useHistory()
 
@@ -16,7 +16,8 @@ const Sidebar = () => {
         history.push(`/profile/${username}`)
     }
     useEffect(() => {
-        dispatch(getUsers())
+        dispatch(getRecommends())
+        return () => dispatch(clearRecommends())
     }, [])
 
 

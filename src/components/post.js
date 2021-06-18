@@ -7,10 +7,9 @@ import {BsBookmark} from "react-icons/bs"
 import {BsBookmarkFill} from "react-icons/bs"
 import '../css/post.css'
 import Avatar from "./avatar";
-import {getProfile} from "../redux/actions/profile";
 import {useDispatch} from "react-redux";
 import {useHistory} from "react-router-dom";
-import {dislikePost, likePost} from "../redux/actions/posts";
+import {dislikePost, likePostInFeed} from "../redux/actions/posts";
 
 const Post = ({postData}) => {
     const dispatch = useDispatch()
@@ -40,16 +39,16 @@ const Post = ({postData}) => {
             <div className="post__footer">
                 <div className="footer__actions">
                     <div className='like-comment'>
-                        <div className="like" >
+                        <div className="like-action" >
                             {postData.isLiked
                                 ? <AiFillHeart color={'red'} onClick={() => dispatch(dislikePost(postData.post_id))}/>
-                                :  <AiOutlineHeart onClick={() => dispatch(likePost(postData.post_id))}/>}
+                                :  <AiOutlineHeart onClick={() => dispatch(likePostInFeed(postData.post_id))}/>}
                         </div>
-                        <div className="comment">
+                        <div className="comment-action">
                             <FaRegComment/>
                         </div>
                     </div>
-                    <div className='save'>
+                    <div className='save-action'>
                         {postData.isSaved ? <BsBookmarkFill/> : <BsBookmark/>}
                     </div>
                 </div>

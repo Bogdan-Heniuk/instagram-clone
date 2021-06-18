@@ -3,22 +3,27 @@ import {store} from "../store";
 import {getProfile} from "./profile";
 import {getFeed} from "./feed";
 
-export const getPosts = (profile_id) => async dispatch => {
+const dislike = async post_id => {
     const token = store.getState().userData.token
 
-    const posts = (await axios.get(`http://localhost:8000/posts/${profile_id}`, {
+    await axios.post("http://localhost:8000/posts/feed/dislike", {post_id}, {
         headers: {
-            token,
             'content-type': 'application/json',
+            token
         }
-    })).data
-
-    dispatch({
-        type: "GET_POSTS",
-        payload: posts
     })
 }
 
+const like = async post_id => {
+    const token = store.getState().userData.token
+
+    await axios.post("http://localhost:8000/posts/feed/like", {post_id}, {
+        headers: {
+            'content-type': 'application/json',
+            token
+        }
+    })
+}
 
 export const createPost = (description, image) => async dispatch => {
     const token = store.getState().userData.token
@@ -34,34 +39,48 @@ export const createPost = (description, image) => async dispatch => {
             token
         }
     })
-
-
     dispatch(getProfile(username))
 }
 
-export const likePost = post_id => async dispatch => {
-    const token = store.getState().userData.token
-
-    await axios.post("http://localhost:8000/posts/feed/like", {post_id}, {
-        headers: {
-            'content-type': 'application/json',
-            token
-        }
-    })
-
+export const likePostInFeed = post_id => async dispatch => {
+    await like(post_id)
     dispatch(getFeed())
 }
 
-export const dislikePost = post_id => async dispatch => {
-    const token = store.getState().userData.token
+export const likePostInProfile = post_id => async dispatch => {
+    await like(post_id)
+    dispatch(viewPost(post_id))
+}
 
-    await axios.post("http://localhost:8000/posts/feed/dislike", {post_id}, {
-        headers: {
+export const dislikePost = post_id => async dispatch => {
+    await dislike(post_id)
+    dispatch(getFeed())
+}
+
+export const dislikePostInProfile = post_id => async dispatch => {
+    await dislike(post_id)
+    dispatch(viewPost(post_id))
+}
+
+export const viewPost = post_id => async dispatch => {
+    console.log(post_id);
+    const token = store.getState().userData.token
+    const response = await axios.get(`http://localhost:8000/posts/view/${post_id}`, {
+        headers : {
             'content-type': 'application/json',
             token
-        }
-    })
+        }})
+    const postData = response.data
 
-    dispatch(getFeed())
+    dispatch({
+        type : "GET_POSTDATA",
+        payload : postData
+    })
+}
+
+export const clearPostData = () => {
+    return {
+        type : "CLEAR_POSTDATA"
+    }
 }
 
