@@ -9,7 +9,7 @@ import '../css/post.css'
 import Avatar from "./avatar";
 import {useDispatch} from "react-redux";
 import {useHistory} from "react-router-dom";
-import {dislikePost, likePostInFeed} from "../redux/actions/posts";
+import {dislikePost, likePostInFeed, savePostFromProfile} from "../redux/actions/posts";
 
 const Post = ({postData}) => {
     const dispatch = useDispatch()
@@ -36,6 +36,7 @@ const Post = ({postData}) => {
                 backgroundImage: `url("http://localhost:8000/uploads/${postData.image}")`,
             }
             }/>
+
             <div className="post__footer">
                 <div className="footer__actions">
                     <div className='like-comment'>
@@ -49,7 +50,9 @@ const Post = ({postData}) => {
                         </div>
                     </div>
                     <div className='save-action'>
-                        {postData.isSaved ? <BsBookmarkFill/> : <BsBookmark/>}
+                        {postData.isSaved
+                            ? <BsBookmarkFill />
+                            : <BsBookmark />}
                     </div>
                 </div>
                 <div className="footer__likes">

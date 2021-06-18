@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {
     clearPostData, commentPostInProfile,
     dislikePostInProfile,
-    likePostInProfile
+    likePostInProfile, savePostFromProfile, unsavePostFromProfile
 } from "../redux/actions/posts";
 import '../css/viewPost.css'
 import {FaRegComment, FaUserCircle} from "react-icons/fa";
@@ -16,6 +16,12 @@ const ViewPost = ({setViewPostModal}) => {
     const dispatch = useDispatch()
     const postData = useSelector(state => state.postData)
     const input = useInputValue('')
+    const handleSubmitClick = (e) => {
+        e.preventDefault()
+        if(!input.value()) return
+        dispatch(commentPostInProfile(postData.post_id, input.value()))
+        input.clear()
+    }
 
     const handleCloseClick = () => {
         dispatch(clearPostData())
@@ -38,7 +44,7 @@ const ViewPost = ({setViewPostModal}) => {
                         <div className="post-user">
                             {postData.avatar
                                 ? <Avatar width='30px' height='30px' url={postData.avatar}/>
-                                : <FaUserCircle className='post-user__avatar'/>
+                                : <FaUserCircle className='comment-user__avatar'/>
                             }
                             <div className="post-user__username">
                                 {postData.username}
@@ -56,11 +62,11 @@ const ViewPost = ({setViewPostModal}) => {
                                                 }
                                             </div>
                                             <span className="comment-user__username">
-                                        {comment.username}
-                                    </span>
+                                                 {comment.username}
+                                            </span>
                                             <span className="comment-text">
-                                    {comment.text}
-                                </span>
+                                                 {comment.text}
+                                             </span>
                                         </div>
                                     </div>
                                 )
@@ -82,9 +88,9 @@ const ViewPost = ({setViewPostModal}) => {
                                     </div>
                                 </div>
                                 <div className='save-action'>
-                                    {postData.isSave
-                                        ? <BsBookmarkFill/>
-                                        : <BsBookmark/>
+                                    {postData.isSaved
+                                        ? <BsBookmarkFill onClick={() => dispatch(unsavePostFromProfile(postData.post_id))}/>
+                                        : <BsBookmark onClick={() => dispatch(savePostFromProfile(postData.post_id))}/>
                                     }
 
                                 </div>
@@ -95,12 +101,7 @@ const ViewPost = ({setViewPostModal}) => {
                         </div>
                         <div className="comment-input">
                             <input {...input.bind} type="text" placeholder='Добавьте комментарий...'/>
-                            <a onClick={(e) => {
-                                e.preventDefault()
-                                if(!input.value()) return
-                                dispatch(commentPostInProfile(postData.post_id, input.value()))
-                                input.clear()
-                            }} className='submit-comment' href="" style={input.value() ? {color : "#0191e7"} : {color : '#8daecb'}}>Опубликовать</a>
+                            <a onClick={(e) => handleSubmitClick(e)} className='submit-comment' href="" style={input.value() ? {color : "#0191e7"} : {color : '#8daecb'}}>Опубликовать</a>
                         </div>
 
                     </div>

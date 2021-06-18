@@ -25,6 +25,28 @@ const like = async post_id => {
     })
 }
 
+
+const save = async post_id => {
+    const token = store.getState().userData.token
+
+    await axios.get(`http://localhost:8000/posts/save/${post_id}`, {
+        headers: {
+            'content-type': 'application/json',
+            token
+        }
+    })
+}
+const unsave = async post_id => {
+    const token = store.getState().userData.token
+
+    await axios.get(`http://localhost:8000/posts/unsave/${post_id}`, {
+        headers: {
+            'content-type': 'application/json',
+            token
+        }
+    })
+}
+
 const comment = async (post_id, text) => {
     const token = store.getState().userData.token
 
@@ -91,6 +113,16 @@ export const viewPost = post_id => async dispatch => {
 
 export const commentPostInProfile = (post_id, text) => async dispatch => {
     await comment(post_id, text)
+    dispatch(viewPost(post_id))
+}
+
+export const savePostFromProfile = post_id => async dispatch => {
+    await save(post_id)
+    dispatch(viewPost(post_id))
+}
+
+export const unsavePostFromProfile = post_id => async dispatch => {
+    await unsave(post_id)
     dispatch(viewPost(post_id))
 }
 

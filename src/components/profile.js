@@ -15,6 +15,7 @@ import ViewPost from "./viewPost";
 const Profile = (props) => {
     const profileData = useSelector(state => state.profile)
     const posts = useSelector(state => state.profile.posts)
+    const userData = useSelector(state => state.userData.userData)
     const [modal, setModal] = useState(false)
     const [viewPostModal, setViewPostModal] = useState(false)
     const dispatch = useDispatch()
@@ -90,10 +91,11 @@ const Profile = (props) => {
                         <MdApps/>
                         Публикации
                     </div>
-                    <div className="nav__item">
+                    {profileData.id === userData.id && <div className="nav__item">
                         <BsBookmark/>
                         Сохраненное
                     </div>
+                    }
                 </div>
                 <div className="profile_posts">
                     {posts?.map(post => {
